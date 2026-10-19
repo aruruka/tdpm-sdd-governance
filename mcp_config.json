@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "tdpm-sdk-bridge": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "${env:PLUGIN_HOME}",
+        "run",
+        "python",
+        "-m",
+        "tdpm_sdd.sdk_bridge"
+      ],
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "tdpm-sdd-governance",
+  "displayName": "TD/PM & SDD Stage-Gated Governance",
+  "version": "1.0.0",
+  "description": "Unifies Technical Director (td-auditor) and Product Manager (pm-planner) subagents with deterministic 6-phase BDD-first Spec-Driven Development (SDD) PreToolUse gatekeeping and read-only Antigravity SDK verification.",
+  "suggestedPrompts": [
+    "Check the current SDD phase lock status and module readiness",
+    "Start Phase 1 Strategic DDD and Phase 2 Socratic BDD dialogue for a new module",
+    "Run the TD/PM Gate Verification audit on the active module"
+  ]
+}

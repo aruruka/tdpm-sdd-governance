@@ -1,0 +1,39 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Testing and coverage
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# Linters and type checkers
+.mypy_cache/
+.ruff_cache/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Scratch and temporary files
+*.tmp
+*.log
+.system_generated/
