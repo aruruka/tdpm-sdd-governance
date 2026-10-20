@@ -7,12 +7,12 @@ Conforms to:
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
 import json
 import os
-from pathlib import Path
 import sys
-from typing import Annotated, Any, Literal, Optional
+from datetime import UTC, datetime
+from pathlib import Path
+from typing import Annotated, Any, Literal
 
 try:
     from mcp.server.mcpserver import MCPServer as FastMCP
@@ -21,6 +21,11 @@ except ImportError:
         from mcp.server.fastmcp import FastMCP  # type: ignore[no-redef, attr-defined]
     except (ImportError, AttributeError):
         FastMCP = Any  # type: ignore[assignment, misc]
+
+try:
+    from mcp.types import ToolAnnotations
+except ImportError:
+    ToolAnnotations = Any  # type: ignore[assignment, misc]
 
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
 
@@ -36,13 +41,13 @@ ALLOWED_SDK_READ_TOOLS = frozenset(
     {"view_file", "code_search", "check_file_metrics", "run_deterministic_gate_check"}
 )
 
-TOOL_ANNOTATIONS = {
-    "title": "Execute Read-Only SDD Gate & SDK Verification",
-    "readOnlyHint": True,
-    "destructiveHint": False,
-    "idempotentHint": True,
-    "openWorldHint": False,
-}
+TOOL_ANNOTATIONS = ToolAnnotations(
+    title="Execute Read-Only SDD Gate & SDK Verification",
+    read_only_hint=True,
+    destructive_hint=False,
+    idempotent_hint=True,
+    open_world_hint=False,
+)
 
 
 def log_gcp_audit(
@@ -58,7 +63,7 @@ def log_gcp_audit(
     """
     entry: dict[str, Any] = {
         "severity": severity,
-        "time": datetime.now(timezone.utc).isoformat(),
+        "time": datetime.now(UTC).isoformat(),
         "message": message,
     }
     if session_id:
@@ -88,7 +93,7 @@ class SDKVerificationRequest(BaseModel):
         default="full_gate",
         description="Specific verification focus area for the sweep.",
     )
-    session_id: Optional[str] = Field(
+    session_id: str | None = Field(
         default=None,
         description="Optional host session or user ID for Google Cloud audit compliance.",
     )
@@ -104,10 +109,10 @@ class AuditResult(BaseModel):
     model_config = ConfigDict(str_strip_whitespace=True)
 
     timestamp_utc: str = Field(
-        default_factory=lambda: datetime.now(timezone.utc).isoformat(),
+        default_factory=lambda: datetime.now(UTC).isoformat(),
         description="ISO 8601 UTC timestamp of audit execution.",
     )
-    session_id: Optional[str] = Field(
+    session_id: str | None = Field(
         default=None,
         description="Host session or user ID for Google Cloud audit compliance.",
     )
@@ -115,7 +120,7 @@ class AuditResult(BaseModel):
     workspace_dir: str
     module_name: str
     phase: int
-    selected_paradigm: Optional[str]
+    selected_paradigm: str | None
     deterministic_gate_passed: bool
     deterministic_findings: list[dict[str, Any]]
     sdk_semantic_report: str
@@ -161,7 +166,7 @@ async def execute_verification_pipeline(
     workspace_dir: str,
     module_name: str = "account",
     focus_area: Literal["traceability", "encapsulation", "contracts", "full_gate"] = "full_gate",
-    session_id: Optional[str] = None,
+    session_id: str | None = None,
     response_format: Literal["json", "markdown"] = "json",
 ) -> str:
     """Core verification engine executing static AST checks and isolated read-only SDK sweeps."""
@@ -365,7 +370,7 @@ async def tdpm_run_sdk_verification_pipeline(
         Field(default="full_gate", description="Specific verification focus area for the sweep."),
     ] = "full_gate",
     session_id: Annotated[
-        Optional[str],
+        str | None,
         Field(default=None, description="Optional host session or user ID for Google Cloud audit compliance."),
     ] = None,
     response_format: Annotated[
@@ -406,7 +411,7 @@ async def run_sdk_verification_pipeline(
         Field(default="full_gate", description="Specific verification focus area for the sweep."),
     ] = "full_gate",
     session_id: Annotated[
-        Optional[str],
+        str | None,
         Field(default=None, description="Optional host session or user ID for Google Cloud audit compliance."),
     ] = None,
     response_format: Annotated[

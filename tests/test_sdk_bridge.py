@@ -12,10 +12,10 @@ from __future__ import annotations
 import asyncio
 import io
 import json
-from pathlib import Path
 import sys
 import tempfile
 import unittest
+from pathlib import Path
 
 from tdpm_sdd.models import (
     PHASE_NAMES,
@@ -25,8 +25,6 @@ from tdpm_sdd.models import (
     save_ledger,
 )
 from tdpm_sdd.sdk_bridge import (
-    AuditResult,
-    format_audit_result_markdown,
     mcp,
     run_sdk_verification_pipeline,
     tdpm_run_sdk_verification_pipeline,
