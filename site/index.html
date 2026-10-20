@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>tdpm-sdd-governance — Spec-Driven Development Antigravity Plugin</title>
+  <meta name="description" content="Eliminate AI code rot with stage-gated Spec-Driven Development for Google Antigravity. Lock BDD specs, tactical DDD contracts, and verification gates before code generation.">
+  <meta name="keywords" content="Spec-Driven Development Antigravity Plugin, AI agent governance, BDD first development, Tactical DDD code generation, Go CQRS event sourcing gate, phase-lock architecture">
+  <meta name="author" content="Raymond Yan (shouneng.website)">
+  <link rel="canonical" href="https://aruruka.github.io/tdpm-sdd-governance/">
+
+  <!-- Open Graph / Social Metadata -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aruruka.github.io/tdpm-sdd-governance/">
+  <meta property="og:title" content="tdpm-sdd-governance — Spec-Driven Development Antigravity Plugin">
+  <meta property="og:description" content="Eliminate AI code rot with stage-gated Spec-Driven Development for Google Antigravity. Lock BDD specs, tactical DDD contracts, and verification gates before code generation.">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="tdpm-sdd-governance — Spec-Driven Development Antigravity Plugin">
+  <meta property="twitter:description" content="Eliminate AI code rot with stage-gated Spec-Driven Development for Google Antigravity. Lock BDD specs, tactical DDD contracts, and verification gates before code generation.">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- JSON-LD Structured Data for AEO / Search Engines -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "tdpm-sdd-governance",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Linux, macOS, Windows",
+        "description": "tdpm-sdd-governance is an open-source Google Antigravity plugin that enforces stage-gated Spec-Driven Development, preventing AI agent code drift by locking BDD specifications, tactical DDD contracts, and deterministic verification gates before code generation.",
+        "url": "https://aruruka.github.io/tdpm-sdd-governance/",
+        "downloadUrl": "https://github.com/aruruka/tdpm-sdd-governance",
+        "license": "https://opensource.org/licenses/MIT",
+        "author": {
+          "@type": "Person",
+          "name": "Raymond Yan",
+          "url": "https://shouneng.website"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is tdpm-sdd-governance?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "tdpm-sdd-governance is an open-source Google Antigravity plugin providing stage-gated Spec-Driven Development. It pairs Product Manager and Technical Director subagents with deterministic lifecycle hooks, cryptographic SHA-256 locks, and static AST auditors to prevent AI agent code rot."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does tdpm-sdd-governance prevent premature code generation?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The plugin uses a PreToolUse hook that blocks write operations to implementation files until prior phases are completed. Agents cannot write Go code before BDD scenarios and tactical DDD stubs are sealed."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which programming languages and tactical paradigms are supported?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "tdpm-sdd-governance primarily targets Go 1.23+ with first-class support for CQRS and event sourcing. It also provides parameterized audit rules for Python and TypeScript across state-based concurrency and vertical-slice CRUD paradigms."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I modify locked specifications or tests after gate promotion?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Modifying locked artifacts triggers a force-ask prompt requiring developer approval. After applying modifications, running promote-phase with the force flag re-seals the cryptographic SHA-256 digests in the state ledger."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does tdpm-sdd-governance send code or telemetry to third-party servers?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. tdpm-sdd-governance operates 100% locally on your machine. All lifecycle hooks, state ledger updates, AST audits, and verification tools execute locally through Python and the Google Antigravity runtime."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does the Socratic BDD Example Mapping dialogue work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "In Phase 2, the Product Manager subagent asks structured domain questions using the ask_question tool. The plugin enforces at least two recorded dialogue rounds before unlocking Gherkin feature file authoring."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I verify that my feature implementation is complete?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Run tdpm-sdd verify-gate to confirm zero AST findings and zero lock drift. Then execute the Go race test suite and run the read-only sdk-architect audit to verify end-to-end traceability."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <!-- Accessibility Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Top Navigation Bar -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#" class="brand-link" aria-label="tdpm-sdd-governance Homepage">
+        <span class="brand-symbol" aria-hidden="true">⬡</span>
+        <span class="brand-name">tdpm-sdd-governance</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary Navigation">
+        <ul class="nav-list">
+          <li><a href="#problem">The Problem</a></li>
+          <li><a href="#solution">Architecture</a></li>
+          <li><a href="#features">Capabilities</a></li>
+          <li><a href="#playbooks">go-cqrs Playbooks</a></li>
+          <li><a href="#comparison">Comparison</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="https://github.com/aruruka/tdpm-sdd-governance" class="nav-external" target="_blank" rel="noopener">GitHub</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button id="theme-toggle" class="btn btn-secondary theme-toggle-btn" type="button" aria-label="Toggle light or dark theme">
+          <span class="theme-icon" aria-hidden="true">🌗</span>
+          <span class="theme-label">Theme</span>
+        </button>
+        <a href="https://github.com/aruruka/tdpm-sdd-governance" class="btn btn-primary nav-cta" target="_blank" rel="noopener">
+          Star on GitHub
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- 1. Hero Section -->
+    <section class="section hero-section" id="hero">
+      <div class="container hero-container">
+        <p class="eyebrow-badge">Spec-Driven Development Antigravity Plugin</p>
+        <h1 class="hero-title">Eliminate AI Code Rot with Stage-Gated Spec-Driven Development</h1>
+        
+        <!-- AEO Extraction Blockquote: Strictly 31 words (25-40 target range), standalone, zero jargon -->
+        <blockquote class="aeo-extraction-block" cite="https://github.com/aruruka/tdpm-sdd-governance">
+          <p>tdpm-sdd-governance is an open-source Google Antigravity plugin that enforces stage-gated Spec-Driven Development, preventing AI agent code drift by locking BDD specifications, tactical DDD contracts, and deterministic verification gates before code generation.</p>
+        </blockquote>
+
+        <div class="hero-actions">
+          <a href="https://github.com/aruruka/tdpm-sdd-governance" class="btn btn-primary btn-large" target="_blank" rel="noopener">
+            View on GitHub (aruruka/tdpm-sdd-governance)
+          </a>
+          <a href="#playbooks" class="btn btn-secondary btn-large">
+            Explore go-cqrs Playbooks
+          </a>
+        </div>
+
+        <div class="stat-bar" role="region" aria-label="Core Performance Metrics">
+          <div class="stat-pill">
+            <span class="stat-dot" aria-hidden="true"></span>
+            <span class="stat-text">6-Phase SDD Pipeline</span>
+          </div>
+          <div class="stat-pill">
+            <span class="stat-dot" aria-hidden="true"></span>
+            <span class="stat-text">Zero Hallucinated APIs</span>
+          </div>
+          <div class="stat-pill">
+            <span class="stat-dot" aria-hidden="true"></span>
+            <span class="stat-text">100% SHA-256 Verified Gates</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Problem Section (Pain-First, No Product Mention Yet) -->
+    <section class="section problem-section" id="problem">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow">The Architectural Reality</p>
+          <h2 class="section-title">Why Autonomous Coding Agents Break Production Architectures</h2>
+          <p class="section-lead">When AI models write code unconstrained, architectural integrity dissolves into technical debt.</p>
+        </div>
+
+        <div class="grid grid-cards">
+          <article class="card problem-card">
+            <div class="card-icon" aria-hidden="true">⚡</div>
+            <h3 class="card-title">Premature Implementation Rush</h3>
+            <p class="card-body">Agents jump straight to database schemas and HTTP handlers before domain rules are settled. They assume business requirements rather than verifying edge cases with domain stakeholders.</p>
+          </article>
+
+          <article class="card problem-card">
+            <div class="card-icon" aria-hidden="true">🔓</div>
+            <h3 class="card-title">Leaky Aggregate Encapsulation</h3>
+            <p class="card-body">LLMs expose internal aggregate state through public getters to satisfy queries. This breaks consistency boundaries and entangles write models with reporting layers.</p>
+          </article>
+
+          <article class="card problem-card">
+            <div class="card-icon" aria-hidden="true">💥</div>
+            <h3 class="card-title">Dual-Write Split-Brain Failures</h3>
+            <p class="card-body">Unconstrained agents issue separate database mutations and message queue calls. Without transactional outbox patterns, network glitches corrupt state across distributed boundaries.</p>
+          </article>
+
+          <article class="card problem-card">
+            <div class="card-icon" aria-hidden="true">🌪️</div>
+            <h3 class="card-title">Silent Specification Drift</h3>
+            <p class="card-body">When implementations diverge, agents modify unit test assertions to match broken code. Upstream specifications lose authority, leaving codebases unmaintainable.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Solution Section (Introducing tdpm-sdd-governance) -->
+    <section class="section solution-section" id="solution">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow">The Governance Solution</p>
+          <h2 class="section-title">Meet tdpm-sdd-governance: Causal Phase Gates for Antigravity Agents</h2>
+          <p class="section-lead">A Google Antigravity plugin enforcing the Technical Director and Product Manager engineering partnership at the tool-execution layer.</p>
+        </div>
+
+        <div class="grid grid-cards solution-grid">
+          <article class="card solution-card">
+            <div class="persona-tag">Orchestration</div>
+            <h3 class="card-title"><code>@td-pm</code> Principal Orchestrator</h3>
+            <p class="card-body">Reads the state ledger (<code>.agents/state/phase-lock.json</code>), enforces phase precedence, and delegates to specialized subagents based on active phase ownership.</p>
+          </article>
+
+          <article class="card solution-card">
+            <div class="persona-tag">Product Ownership</div>
+            <h3 class="card-title"><code>@pm-planner</code> Product Manager</h3>
+            <p class="card-body">Drives Phase 0 legacy brownfield triage, Phase 1 ubiquitous language context maps, and Phase 2 multi-round Socratic BDD dialogue via the <code>ask_question</code> tool.</p>
+          </article>
+
+          <article class="card solution-card">
+            <div class="persona-tag">Architecture Authority</div>
+            <h3 class="card-title"><code>@td-auditor</code> Technical Director</h3>
+            <p class="card-body">Enforces Bridge 2.5b pattern selection, Phase 3 tactical DDD stubs, Phase 4 OpenAPI/AsyncAPI/DDL contracts, and Phase 5 inside-out Red-to-Green implementation.</p>
+          </article>
+
+          <article class="card solution-card">
+            <div class="persona-tag">Deterministic Protection</div>
+            <h3 class="card-title"><code>PreToolUse</code> Hook Enforcement</h3>
+            <p class="card-body">Physically intercepts all file writes, edits, and shell commands. Denies premature code authoring and blocks modifications to cryptographically locked artifacts.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Features as Benefits Table -->
+    <section class="section features-section" id="features">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow">Engineered Capabilities</p>
+          <h2 class="section-title">Features Mapped to Concrete Engineering Outcomes</h2>
+          <p class="section-lead">Every governance mechanism directly prevents a known failure mode in autonomous coding agents.</p>
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table" aria-label="Features and Engineering Outcomes">
+            <thead>
+              <tr>
+                <th scope="col">Feature Mechanism</th>
+                <th scope="col">Underlying Technology</th>
+                <th scope="col">Production Engineering Outcome</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Phase-Lock State Ledger</strong></td>
+                <td>Pydantic v2 JSON state machine (<code>phase-lock.json</code>)</td>
+                <td>Eliminates out-of-order execution; agents cannot write production code ahead of locked specifications.</td>
+              </tr>
+              <tr>
+                <td><strong>Multi-Round Socratic BDD</strong></td>
+                <td>Interactive <code>ask_question</code> dialogue in Phase 2</td>
+                <td>Guarantees domain rules and edge cases are clarified with humans before implementing domain logic.</td>
+              </tr>
+              <tr>
+                <td><strong>Panic <code>SDD_STUB</code> Enforcement</strong></td>
+                <td>Single-line panic stubs on generated Go methods</td>
+                <td>Prevents business logic leakage while freezing compiler type signatures and domain aggregate interfaces.</td>
+              </tr>
+              <tr>
+                <td><strong>Deterministic Gate CLI</strong></td>
+                <td>Local Python CLI (<code>tdpm-sdd verify-gate</code>)</td>
+                <td>Replaces subjective AI self-audits with binary, reproducible zero-drift gate verifications.</td>
+              </tr>
+              <tr>
+                <td><strong>Read-Only SDK Verification</strong></td>
+                <td>FastMCP bridge (<code>tdpm-sdk-bridge</code> / <code>@sdk-architect</code>)</td>
+                <td>Provides tamper-proof architectural verification without granting mutating write tools to audit subagents.</td>
+              </tr>
+              <tr>
+                <td><strong>Cryptographic SHA-256 Locks</strong></td>
+                <td>CRLF-normalized SHA-256 hash digests</td>
+                <td>Detects unauthorized modifications to upstream specs, feature files, and test suites across all OS platforms.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Social Proof & Architecture Guarantee Stats -->
+    <section class="section stats-section">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow">Deterministic Reliability</p>
+          <h2 class="section-title">Cryptographic Guarantees for Mission-Critical Systems</h2>
+          <p class="section-lead">Built for teams where silent regressions, dual-write split-brains, and leaky abstractions are unacceptable.</p>
+        </div>
+
+        <div class="grid grid-stats">
+          <div class="stat-card">
+            <span class="stat-number">0</span>
+            <span class="stat-heading">Hallucinated APIs</span>
+            <p class="stat-desc">Zero unverified endpoints or public aggregate getters survive static AST checks.</p>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">100%</span>
+            <span class="stat-heading">Spec Traceability</span>
+            <p class="stat-desc">Direct 1:1 mapping from Gherkin scenarios to Go domain types and passing test harnesses.</p>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">SHA-256</span>
+            <span class="stat-heading">Tamper-Proof Locks</span>
+            <p class="stat-desc">CRLF-normalized digest verification prevents stealth edits to sealed upstream artifacts.</p>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">Local-First</span>
+            <span class="stat-heading">Zero Telemetry</span>
+            <p class="stat-desc">All gates, hooks, and audits execute on your workstation without cloud dependencies.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Mid-Page CTA -->
+    <section class="section cta-section mid-cta">
+      <div class="container cta-container">
+        <h2 class="cta-title">Add Deterministic Governance to Your Antigravity Workspace</h2>
+        <p class="cta-text">Install the plugin locally with <code>uv</code> and bootstrap your first stage-gated workspace in under 60 seconds.</p>
+        
+        <div class="code-box-wrapper">
+          <div class="code-box-header">
+            <span class="code-box-title">Terminal (Bash / PowerShell)</span>
+            <button class="copy-btn" data-clipboard="export PLUGIN_HOME=&quot;$HOME/.gemini/config/plugins/tdpm-sdd-governance&quot;&#10;git clone https://github.com/aruruka/tdpm-sdd-governance.git &quot;$PLUGIN_HOME&quot;&#10;uv --directory &quot;$PLUGIN_HOME&quot; sync" type="button" aria-label="Copy installation command">
+              Copy Command
+            </button>
+          </div>
+          <pre class="code-box"><code><span class="c-comment"># Set plugin directory and clone repository</span>
+export PLUGIN_HOME="$HOME/.gemini/config/plugins/tdpm-sdd-governance"
+git clone https://github.com/aruruka/tdpm-sdd-governance.git "$PLUGIN_HOME"
+
+<span class="c-comment"># Synchronize Python virtual environment</span>
+uv --directory "$PLUGIN_HOME" sync</code></pre>
+        </div>
+
+        <div class="cta-actions">
+          <a href="https://github.com/aruruka/tdpm-sdd-governance#readme" class="btn btn-primary" target="_blank" rel="noopener">
+            Browse Getting Started Guide
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. How It Works & Complete go-cqrs Developer Process Playbooks -->
+    <section class="section playbooks-section" id="playbooks">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow">Real-World Developer Workflows</p>
+          <h2 class="section-title">Interactive Developer Playbook: <code>go-cqrs</code> in Action</h2>
+          <p class="section-lead">Explore how human developers collaborate with <code>@td-pm</code>, <code>@pm-planner</code>, and <code>@td-auditor</code> across feature delivery and bug patching.</p>
+        </div>
+
+        <!-- Playbook Tabs -->
+        <div class="tabs-container">
+          <div class="tab-list" role="tablist" aria-label="go-cqrs Developer Playbooks">
+            <button class="tab-button active" role="tab" id="tab-playbook-a" aria-selected="true" aria-controls="panel-playbook-a" tabindex="0">
+              Playbook A: Add New Feature / Module
+            </button>
+            <button class="tab-button" role="tab" id="tab-playbook-b" aria-selected="false" aria-controls="panel-playbook-b" tabindex="-1">
+              Playbook B: Patch / Fix Bug in Existing Module
+            </button>
+          </div>
+
+          <!-- Tab Panel A: Adding New Feature / Module -->
+          <div class="tab-panel active" role="tabpanel" id="panel-playbook-a" aria-labelledby="tab-playbook-a">
+            <div class="playbook-intro">
+              <span class="badge badge-accent">Scenario</span>
+              <p>You need to add a net-new <code>transfer</code> module (for inter-account fund transfers) to an existing <code>go-cqrs</code> service (<code>./modern-service</code>) without allowing the AI agent to skip specifications or leak domain internals.</p>
+            </div>
+
+            <ol class="playbook-steps">
+              <!-- Step 1 -->
+              <li class="playbook-step">
+                <div class="step-badge">Step 1</div>
+                <div class="step-content">
+                  <h3 class="step-title">Initial Entrypoint: Register Module with <code>@td-pm</code></h3>
+                  <p>Start with <strong><code>@td-pm</code></strong> (Principal Orchestrator) or trigger <strong><code>/sdd-bdd-architect</code></strong>. Register the module at Phase 1 (skipping Phase 0 brownfield triage for net-new greenfield features):</p>
+                  
+                  <div class="code-box-wrapper">
+                    <div class="code-box-header">
+                      <span class="code-box-title">CLI Command</span>
+                      <button class="copy-btn" data-clipboard="uv run --directory &quot;$PLUGIN_HOME&quot; python -m tdpm_sdd.cli add-module --workspace ./modern-service --module transfer --language go --phase 1 --activate" type="button" aria-label="Copy step 1 command">Copy</button>
+                    </div>
+                    <pre class="code-box"><code>uv run --directory "$PLUGIN_HOME" python -m tdpm_sdd.cli add-module \
+  --workspace ./modern-service \
+  --module transfer \
+  --language go \
+  --phase 1 \
+  --activate</code></pre>
+                  </div>
+                  <p class="step-note"><strong>Lifecycle Guard:</strong> The <code>PreInvocation</code> hook immediately renders the status banner into the conversation, and <code>PreToolUse</code> physically blocks premature writes to <code>.go</code>, <code>.feature</code>, or <code>.sql</code> files.</p>
+                </div>
+              </li>
+
+              <!-- Step 2 -->
+              <li class="playbook-step">
+                <div class="step-badge">Step 2</div>
+                <div class="step-content">
+                  <h3 class="step-title">Phase 1: Strategic DDD & Context Mapping</h3>
+                  <p><code>@td-pm</code> delegates work to <strong><code>@pm-planner</code></strong> and <strong><code>@td-auditor</code></strong> to define architectural boundaries:</p>
+                  <ul class="step-list">
+                    <li><strong><code>docs/architecture/boundary-map.md</code></strong>: Define Ubiquitous Language Glossary, Subdomain classification (<code>Core</code> vs <code>Supporting</code>), and Context Map relationships (<code>OHS</code>, <code>PL</code>, <code>SK</code>, <code>ACL</code>).</li>
+                    <li><strong><code>specs/ddd/arch-rules.yaml</code></strong>: Lock forbidden cross-boundary Go package imports.</li>
+                    <li><strong><code>docs/architecture/ARCHITECTURE_BLUEPRINT.md</code></strong>: Document topology diagrams (Go code snippets capped at &le;15 lines by <code>SDD-BLUEPRINT-NO-CODE-DUMP</code>).</li>
+                  </ul>
+                  <p><strong>Gate G1 Transition:</strong> Run <code>tdpm-sdd verify-gate</code> &rarr; developer approves scorecard via <code>ask_question</code> &rarr; run:</p>
+                  <pre class="code-box"><code>tdpm-sdd promote-phase --workspace ./modern-service --module transfer \
+  --lock-files "docs/architecture/boundary-map.md" "specs/ddd/arch-rules.yaml"</code></pre>
+                </div>
+              </li>
+
+              <!-- Step 3 -->
+              <li class="playbook-step">
+                <div class="step-badge">Step 3</div>
+                <div class="step-content">
+                  <h3 class="step-title">Phase 2: Socratic BDD Dialogue & Bridge 2.5b Pattern Gate</h3>
+                  <p><code>@pm-planner</code> conducts structured Example Mapping in <code>specs/bdd/example-map.md</code> and interviews the developer through <strong>at least 2 rounds of <code>ask_question</code></strong>, logging each round:</p>
+                  <pre class="code-box"><code>tdpm-sdd record-dialogue --workspace ./modern-service --module transfer --round 1 --unresolved-questions 2
+tdpm-sdd record-dialogue --workspace ./modern-service --module transfer --round 2 --unresolved-questions 0</code></pre>
+                  
+                  <p>Next, <code>@td-auditor</code> documents the Event Modeling timeline and executes the Bridge 2.5b Tactical Pattern Gate:</p>
+                  <pre class="code-box"><code>uv run --directory "$PLUGIN_HOME" python -m tdpm_sdd.cli select-pattern \
+  --workspace ./modern-service \
+  --module transfer \
+  --paradigm CQRS_EVENT_SOURCING \
+  --scope PROCESS_MANAGER_SAGA</code></pre>
+                  
+                  <p>Once approved, <code>@pm-planner</code> authors <code>specs/features/transfer.feature</code> in pure Ubiquitous Language (<code>Given</code> events / <code>When</code> command / <code>Then</code> emitted events or domain errors—zero HTTP/SQL leakage). Then promote through Gate <code>G2</code>.</p>
+                </div>
+              </li>
+
+              <!-- Step 4 -->
+              <li class="playbook-step">
+                <div class="step-badge">Step 4</div>
+                <div class="step-content">
+                  <h3 class="step-title">Phase 3: Tactical DDD Stubs & Ports (<code>SDD_STUB</code>)</h3>
+                  <p>Active ownership switches to <strong><code>@td-auditor</code></strong> (skill: <code>/sdd-tactical-contract</code>). Translates <code>transfer.feature</code> 1:1 into Go domain types under <code>internal/transfer/...</code>:</p>
+                  <ul class="step-list">
+                    <li><strong>Sealed Aggregates:</strong> Strictly private/unexported fields (public getters blocked by <code>DDD-SEALED-AGGREGATE-GETTER</code>).</li>
+                    <li><strong>Value Objects:</strong> Currency represented as <code>int64</code> cents (float types blocked by <code>DDD-FLOAT-CURRENCY</code>).</li>
+                    <li><strong>Method Stubs:</strong> Every function body must be a single-line panic stub:
+                      <pre class="code-box"><code>panic("SDD_STUB: implementation locked until Phase 5b")</code></pre>
+                    </li>
+                  </ul>
+                  <p>Promote through Gate <code>G3</code>, locking tactical documentation and stubs.</p>
+                </div>
+              </li>
+
+              <!-- Step 5 -->
+              <li class="playbook-step">
+                <div class="step-badge">Step 5</div>
+                <div class="step-content">
+                  <h3 class="step-title">Phase 4: Interface & Storage Contracts</h3>
+                  <p>Production Go source files are frozen. <code>@td-auditor</code> and <code>@pm-planner</code> lock technical contracts:</p>
+                  <ul class="step-list">
+                    <li><code>specs/openapi/transfer.v1.yaml</code> (OpenAPI 3.1 HTTP contract)</li>
+                    <li><code>specs/asyncapi/transfer-events.v1.yaml</code> (AsyncAPI 3.0 event payload contract)</li>
+                    <li><code>migrations/**/*.sql</code> (PostgreSQL 16 idempotent DDL)</li>
+                    <li><code>docs/uat/UAT_PLAYBOOK.md</code> (Pre-implementation user acceptance playbook)</li>
+                  </ul>
+                  <p>Promote through Gate <code>G4</code> to advance to Phase <code>5a_RED_HARNESS</code>.</p>
+                </div>
+              </li>
+
+              <!-- Step 6 -->
+              <li class="playbook-step">
+                <div class="step-badge">Step 6</div>
+                <div class="step-content">
+                  <h3 class="step-title">Phase 5: Red-to-Green Implementation</h3>
+                  <div class="sub-phase-flow">
+                    <div class="sub-phase-card">
+                      <span class="sub-phase-tag">Sub-Phase 5a</span>
+                      <h4>Red Test Harness</h4>
+                      <p>Agent writes only <code>*_test.go</code> files. Tests must compile (<code>go test -c ./...</code> exits 0) and fail against <code>SDD_STUB</code> panics. Lock tests and advance to 5b.</p>
+                    </div>
+                    <div class="sub-phase-card">
+                      <span class="sub-phase-tag">Sub-Phase 5b</span>
+                      <h4>Inside-Out Implementation</h4>
+                      <p>Replaces stubs inside-out: Domain Aggregate &rarr; Event Store & Outbox &rarr; Projections &rarr; HTTP Routers. Upstream contracts remain cryptographically locked.</p>
+                    </div>
+                    <div class="sub-phase-card">
+                      <span class="sub-phase-tag">Sub-Phase 5c</span>
+                      <h4>Verification & Cutover</h4>
+                      <p>Executes concurrency suites, race detection, and publishes benchmark evidence in <code>docs/architecture/CUTOVER_AND_BENCHMARK_REPORT.md</code>.</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <!-- Step 7 -->
+              <li class="playbook-step">
+                <div class="step-badge">Step 7</div>
+                <div class="step-content">
+                  <h3 class="step-title">4-Point Completion Criteria</h3>
+                  <p>A module is verified 100% complete when all four independent criteria pass:</p>
+                  <div class="grid grid-cards completion-grid">
+                    <div class="card check-card">
+                      <span class="check-icon" aria-hidden="true">✓</span>
+                      <h4>1. State Ledger Check</h4>
+                      <p><code>tdpm-sdd status</code> reports <code>current_phase: 5</code>, <code>sub_phase: "5c_VERIFICATION"</code>, and <code>gates_passed: ["G1", "G2", "G3", "G4", "G5"]</code>.</p>
+                    </div>
+                    <div class="card check-card">
+                      <span class="check-icon" aria-hidden="true">✓</span>
+                      <h4>2. Deterministic Gate Audit</h4>
+                      <p><code>tdpm-sdd verify-gate</code> exits 0 with <code>"passed": true</code>, 0 AST errors, and 0 remaining <code>SDD_STUB</code> panics.</p>
+                    </div>
+                    <div class="card check-card">
+                      <span class="check-icon" aria-hidden="true">✓</span>
+                      <h4>3. Go Race Test Suite</h4>
+                      <p><code>go test -v -race ./internal/transfer/... ./test/verification/...</code> passes 100% with zero data races.</p>
+                    </div>
+                    <div class="card check-card">
+                      <span class="check-icon" aria-hidden="true">✓</span>
+                      <h4>4. Read-Only SDK Verification</h4>
+                      <p><strong><code>@sdk-architect</code></strong> confirms end-to-end traceability and 100% SHA-256 cryptographic lock integrity via FastMCP.</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ol>
+          </div>
+
+          <!-- Tab Panel B: Bug Patching & Controlled Unlocking -->
+          <div class="tab-panel" role="tabpanel" id="panel-playbook-b" aria-labelledby="tab-playbook-b" hidden>
+            <div class="playbook-intro">
+              <span class="badge badge-accent">Scenario</span>
+              <p>An existing module (<code>account</code>) is at Phase 5 (<code>5c_VERIFICATION</code>) with all production code and test files sealed by SHA-256 locks. A production edge-case bug requires a patch without breaking upstream contracts.</p>
+            </div>
+
+            <ol class="playbook-steps">
+              <!-- Step 1 -->
+              <li class="playbook-step">
+                <div class="step-badge">Step 1</div>
+                <div class="step-content">
+                  <h3 class="step-title">Entrypoint: Invoke <code>@td-auditor</code> & Inspect Status</h3>
+                  <p>Invoke <strong><code>@td-auditor</code></strong> with skills <strong><code>/systematic-debugging</code></strong> and <strong><code>/strict-audit</code></strong> to diagnose the root cause:</p>
+                  
+                  <div class="code-box-wrapper">
+                    <div class="code-box-header">
+                      <span class="code-box-title">CLI Command</span>
+                      <button class="copy-btn" data-clipboard="uv run --directory &quot;$PLUGIN_HOME&quot; python -m tdpm_sdd.cli status --workspace ./modern-service" type="button" aria-label="Copy step 1 status command">Copy</button>
+                    </div>
+                    <pre class="code-box"><code>uv run --directory "$PLUGIN_HOME" python -m tdpm_sdd.cli status --workspace ./modern-service</code></pre>
+                  </div>
+                  <p class="step-note">Confirm the module is locked and identify which specific domain invariant failed.</p>
+                </div>
+              </li>
+
+              <!-- Step 2 -->
+              <li class="playbook-step">
+                <div class="step-badge">Step 2</div>
+                <div class="step-content">
+                  <h3 class="step-title">Controlled Unlocking & Red-First Bug Patching Workflow</h3>
+                  <p>Because tests and code are locked in <code>phase-lock.json</code>, silent ad-hoc fixes are blocked:</p>
+                  
+                  <div class="sub-phase-flow">
+                    <div class="sub-phase-card">
+                      <span class="sub-phase-tag">Action 2.1</span>
+                      <h4>Write Regression Test First</h4>
+                      <p>Target <code>account_test.go</code>. <code>PreToolUse</code> triggers a <strong><code>force_ask</code></strong> human approval checkpoint. Approve the edit and verify <code>go test</code> <strong>fails</strong> on the new regression test.</p>
+                    </div>
+                    <div class="sub-phase-card">
+                      <span class="sub-phase-tag">Action 2.2</span>
+                      <h4>Apply Root-Cause Fix in Code</h4>
+                      <p>Edit production code (e.g. <code>postgres_read_repo.go</code>). <code>PreToolUse</code> prompts for human approval while running static AST checks to block leaky shortcuts.</p>
+                    </div>
+                    <div class="sub-phase-card">
+                      <span class="sub-phase-tag">Action 2.3</span>
+                      <h4>Re-Seal SHA-256 Locks</h4>
+                      <p>Re-lock modified artifacts so <code>verify-gate</code> captures the new canonical SHA-256 checksums and clears <code>SDD-LOCK-DRIFT</code>:</p>
+                      <pre class="code-box"><code>tdpm-sdd promote-phase --workspace ./modern-service \
+  --module account \
+  --lock-files "internal/account/**/*.go" "test/verification/*_test.go" \
+  --force</code></pre>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <!-- Step 3 -->
+              <li class="playbook-step">
+                <div class="step-badge">Step 3</div>
+                <div class="step-content">
+                  <h3 class="step-title">4-Step Verification Checklist</h3>
+                  <p>Confirm the bug fix is robust and regression-free before merging:</p>
+                  <div class="grid grid-cards completion-grid">
+                    <div class="card check-card">
+                      <span class="check-icon" aria-hidden="true">✓</span>
+                      <h4>1. Red &rarr; Green Proof</h4>
+                      <p>The new test failed before the fix and passes consistently under <code>go test -v -race ./...</code>.</p>
+                    </div>
+                    <div class="card check-card">
+                      <span class="check-icon" aria-hidden="true">✓</span>
+                      <h4>2. Deterministic Gate Audit</h4>
+                      <p><code>tdpm-sdd verify-gate</code> returns <code>"passed": true</code> with 0 AST findings and 0 lock-drift errors.</p>
+                    </div>
+                    <div class="card check-card">
+                      <span class="check-icon" aria-hidden="true">✓</span>
+                      <h4>3. Read-Only Invariant Audit</h4>
+                      <p><code>@sdk-architect</code> confirms OpenAPI/AsyncAPI schemas and outbox idempotency remain intact.</p>
+                    </div>
+                    <div class="card check-card">
+                      <span class="check-icon" aria-hidden="true">✓</span>
+                      <h4>4. Concurrency Suite</h4>
+                      <p>Parallel withdrawals, event replays, and outbox retries pass cleanly with zero data races.</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Comparison Table (Honest Evaluation) -->
+    <section class="section comparison-section" id="comparison">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow">Architectural Evaluation</p>
+          <h2 class="section-title">Architectural Governance vs. Alternative Approaches</h2>
+          <p class="section-lead">An objective comparison of engineering trade-offs between raw prompting, unchecked subagents, and stage-gated SDD.</p>
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table" aria-label="Comparison Table">
+            <thead>
+              <tr>
+                <th scope="col">Dimension</th>
+                <th scope="col">Raw AI Prompts</th>
+                <th scope="col">Unchecked Autonomous Agents</th>
+                <th scope="col">tdpm-sdd-governance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Best Suited For</strong></td>
+                <td><span class="tag tag-winner">Disposable prototypes & rapid one-off scripts</span></td>
+                <td>Exploratory spikes without strict business domain rules</td>
+                <td>Production distributed systems and long-term enterprise software</td>
+              </tr>
+              <tr>
+                <td><strong>Causal Phase Progression</strong></td>
+                <td>None; generates code, handlers, and SQL schemas in a single turn</td>
+                <td>Ad-hoc step tracking; prone to premature implementation rushes</td>
+                <td>Enforces strict 6-phase causal sequence ($P0 \rightarrow P5$)</td>
+              </tr>
+              <tr>
+                <td><strong>Domain Rule Discovery</strong></td>
+                <td>Dependent on user prompt thoroughness</td>
+                <td>Agent fills gaps with silent, unverified assumptions</td>
+                <td>Mandatory &ge;2 rounds of Socratic Example Mapping via <code>ask_question</code></td>
+              </tr>
+              <tr>
+                <td><strong>Aggregate Encapsulation</strong></td>
+                <td>Frequently leaks internal entity state via public getters</td>
+                <td>Inconsistent; exposes getters whenever convenient for queries</td>
+                <td>Enforces sealed aggregates with private fields via static AST rules</td>
+              </tr>
+              <tr>
+                <td><strong>Contract Verification</strong></td>
+                <td>None; hallucinated parameters and inconsistent response codes</td>
+                <td>Tests are frequently rewritten by agents to match broken code</td>
+                <td>Formal OpenAPI 3.1, AsyncAPI 3.0, and SQL DDL locked before code generation</td>
+              </tr>
+              <tr>
+                <td><strong>Tamper-Proof Drift Detection</strong></td>
+                <td>Manual inspection required</td>
+                <td>Silent drift undetected across long conversation trajectories</td>
+                <td>CRLF-normalized SHA-256 digests physically block unauthorized mutations</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-caption"><strong>Honest Trade-off:</strong> If you are building a throwaway prototype or disposable script, raw AI prompts are faster. <code>tdpm-sdd-governance</code> is designed for software where domain correctness, contract stability, and zero hallucinations are mandatory.</p>
+      </div>
+    </section>
+
+    <!-- 9. FAQ Section (AEO Optimized) -->
+    <section class="section faq-section" id="faq">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow">Clear Answers</p>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <p class="section-lead">Self-contained answers for engineers, architects, and AI answer engines.</p>
+        </div>
+
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>What is tdpm-sdd-governance?</span>
+              <span class="faq-chevron" aria-hidden="true">▾</span>
+            </summary>
+            <div class="faq-answer">
+              <p>tdpm-sdd-governance is an open-source Google Antigravity plugin providing stage-gated Spec-Driven Development. It pairs Product Manager and Technical Director subagents with deterministic lifecycle hooks, cryptographic SHA-256 locks, and static AST auditors to prevent AI agent code rot.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>How does tdpm-sdd-governance prevent premature code generation?</span>
+              <span class="faq-chevron" aria-hidden="true">▾</span>
+            </summary>
+            <div class="faq-answer">
+              <p>The plugin uses a PreToolUse hook that blocks write operations to implementation files until prior phases are completed. Agents cannot write Go code before BDD scenarios and tactical DDD stubs are sealed.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>Which programming languages and tactical paradigms are supported?</span>
+              <span class="faq-chevron" aria-hidden="true">▾</span>
+            </summary>
+            <div class="faq-answer">
+              <p>tdpm-sdd-governance primarily targets Go 1.23+ with first-class support for CQRS and event sourcing. It also provides parameterized audit rules for Python and TypeScript across state-based concurrency and vertical-slice CRUD paradigms.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>Can I modify locked specifications or tests after gate promotion?</span>
+              <span class="faq-chevron" aria-hidden="true">▾</span>
+            </summary>
+            <div class="faq-answer">
+              <p>Yes. Modifying locked artifacts triggers a force-ask prompt requiring developer approval. After applying modifications, running promote-phase with the force flag re-seals the cryptographic SHA-256 digests in the state ledger.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>Does tdpm-sdd-governance send code or telemetry to third-party servers?</span>
+              <span class="faq-chevron" aria-hidden="true">▾</span>
+            </summary>
+            <div class="faq-answer">
+              <p>No. tdpm-sdd-governance operates 100% locally on your machine. All lifecycle hooks, state ledger updates, AST audits, and verification tools execute locally through Python and the Google Antigravity runtime.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>How does the Socratic BDD Example Mapping dialogue work?</span>
+              <span class="faq-chevron" aria-hidden="true">▾</span>
+            </summary>
+            <div class="faq-answer">
+              <p>In Phase 2, the Product Manager subagent asks structured domain questions using the ask_question tool. The plugin enforces at least two recorded dialogue rounds before unlocking Gherkin feature file authoring.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>How do I verify that my feature implementation is complete?</span>
+              <span class="faq-chevron" aria-hidden="true">▾</span>
+            </summary>
+            <div class="faq-answer">
+              <p>Run tdpm-sdd verify-gate to confirm zero AST findings and zero lock drift. Then execute the Go race test suite and run the read-only sdk-architect audit to verify end-to-end traceability.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. Trust Signals & Compliance -->
+    <section class="section trust-section">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow">Enterprise Trust</p>
+          <h2 class="section-title">Open-Source, Local-First, and Cryptographically Auditable</h2>
+          <p class="section-lead">Designed for engineering organizations demanding predictable provenance and zero external dependencies.</p>
+        </div>
+
+        <div class="grid grid-cards trust-grid">
+          <article class="card trust-card">
+            <div class="trust-badge">MIT License</div>
+            <h3 class="card-title">Permissive Open Source</h3>
+            <p class="card-body">Copyright &copy; 2026 Raymond Yan (shouneng.website). Fully permissive license allowing unrestricted use in commercial, enterprise, and proprietary codebases.</p>
+          </article>
+
+          <article class="card trust-card">
+            <div class="trust-badge">Local-First</div>
+            <h3 class="card-title">Zero Telemetry Leakage</h3>
+            <p class="card-body">All lifecycle hooks, gatekeeper checks, and AST verifications run strictly in-process on your developer machine. No external servers or telemetry beacons.</p>
+          </article>
+
+          <article class="card trust-card">
+            <div class="trust-badge">Cross-Platform</div>
+            <h3 class="card-title">CRLF-Normalized Locks</h3>
+            <p class="card-body">Cryptographic SHA-256 digests automatically normalize carriage returns across Windows, Linux, and macOS, preventing false-positive lock drift in cross-OS teams.</p>
+          </article>
+
+          <article class="card trust-card">
+            <div class="trust-badge">Type Safety</div>
+            <h3 class="card-title">Pydantic v2 Architecture</h3>
+            <p class="card-body">Built with Python 3.11+ and Pydantic v2 for deterministic state ledger serialization, validated schema migration, and instant CLI command execution via <code>uv</code>.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. Final CTA & Footer -->
+    <section class="section cta-section final-cta">
+      <div class="container cta-container">
+        <h2 class="cta-title">Take Control of Autonomous Coding Agents Today</h2>
+        <p class="cta-text">Stop debugging hallucinated APIs and leaky abstractions. Enforce stage-gated Spec-Driven Development in your Google Antigravity workspaces.</p>
+        <div class="cta-actions">
+          <a href="https://github.com/aruruka/tdpm-sdd-governance" class="btn btn-primary btn-large" target="_blank" rel="noopener">
+            Star on GitHub (aruruka/tdpm-sdd-governance)
+          </a>
+          <a href="https://github.com/aruruka/tdpm-sdd-governance#readme" class="btn btn-secondary btn-large" target="_blank" rel="noopener">
+            Read Full Documentation
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <div class="brand-link">
+          <span class="brand-symbol" aria-hidden="true">⬡</span>
+          <span class="brand-name">tdpm-sdd-governance</span>
+        </div>
+        <p class="footer-desc">Deterministic 6-Phase BDD-First Spec-Driven Development and TD/PM Governance for Google Antigravity.</p>
+        <p class="footer-copy">&copy; 2026 Raymond Yan (<a href="https://shouneng.website" target="_blank" rel="noopener">shouneng.website</a>). Released under the MIT License.</p>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-heading">Documentation</h3>
+        <ul class="footer-links">
+          <li><a href="https://github.com/aruruka/tdpm-sdd-governance/blob/main/docs/getting-started.md" target="_blank" rel="noopener">Getting Started</a></li>
+          <li><a href="https://github.com/aruruka/tdpm-sdd-governance/blob/main/docs/stage-gates.md" target="_blank" rel="noopener">Stage Gates Reference</a></li>
+          <li><a href="https://github.com/aruruka/tdpm-sdd-governance/blob/main/docs/cqrs-migration-walkthrough.md" target="_blank" rel="noopener">CQRS Migration Tutorial</a></li>
+          <li><a href="https://github.com/aruruka/tdpm-sdd-governance/blob/main/docs/troubleshooting.md" target="_blank" rel="noopener">Troubleshooting</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-heading">Repository</h3>
+        <ul class="footer-links">
+          <li><a href="https://github.com/aruruka/tdpm-sdd-governance" target="_blank" rel="noopener">GitHub Repository</a></li>
+          <li><a href="https://github.com/aruruka/tdpm-sdd-governance/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a></li>
+          <li><a href="https://github.com/aruruka/tdpm-sdd-governance/blob/main/SECURITY.md" target="_blank" rel="noopener">Security Policy</a></li>
+          <li><a href="https://github.com/aruruka/tdpm-sdd-governance/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Notification Toast for Accessible Copy Feedback -->
+  <div id="copy-toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Client-Side Interactive Script -->
+  <script src="app.js"></script>
+</body>
+</html>

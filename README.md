@@ -1,6 +1,6 @@
 # TD/PM & Stage-Gated SDD Governance (`tdpm-sdd-governance`)
 
-[![CI](https://github.com/example-org/tdpm-sdd-governance/actions/workflows/ci.yml/badge.svg)](https://github.com/example-org/tdpm-sdd-governance/actions/workflows/ci.yml)
+[![CI](https://github.com/aruruka/tdpm-sdd-governance/actions/workflows/ci.yml/badge.svg)](https://github.com/aruruka/tdpm-sdd-governance/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![Pydantic v2](https://img.shields.io/badge/pydantic-v2-e92063.svg)](https://docs.pydantic.dev/)
@@ -137,14 +137,14 @@ Requires **Python 3.11+** and **[`uv`](https://docs.astral.sh/uv/)**:
 **Linux / macOS / WSL:**
 ```bash
 export PLUGIN_HOME="$HOME/.gemini/config/plugins/tdpm-sdd-governance"
-git clone https://github.com/example-org/tdpm-sdd-governance.git "$PLUGIN_HOME"
+git clone https://github.com/aruruka/tdpm-sdd-governance.git "$PLUGIN_HOME"
 uv --directory "$PLUGIN_HOME" sync
 ```
 
 **Windows (PowerShell):**
 ```powershell
 $env:PLUGIN_HOME = "$HOME\.gemini\config\plugins\tdpm-sdd-governance"
-git clone https://github.com/example-org/tdpm-sdd-governance.git $env:PLUGIN_HOME
+git clone https://github.com/aruruka/tdpm-sdd-governance.git $env:PLUGIN_HOME
 uv --directory $env:PLUGIN_HOME sync
 ```
 
@@ -198,4 +198,4 @@ uv run --directory "$PLUGIN_HOME" python -m unittest discover -s tests -v
 
 ## License
 
-MIT License. Copyright (c) 2026 Antigravity Authors & Contributors. See [LICENSE](LICENSE) for details.
+MIT License. Copyright (c) 2026 Raymond Yan (shouneng.website). See [LICENSE](LICENSE) for details.

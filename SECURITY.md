@@ -13,7 +13,7 @@ We take the security of `tdpm-sdd-governance` seriously. If you discover a secur
 **Please do not report security vulnerabilities through public GitHub issues.**
 
 Instead, please report security issues by sending an email to:
-security@example.org
+keraymondyan69@gmail.com
 
 Please include:
 - A description of the issue and potential impact

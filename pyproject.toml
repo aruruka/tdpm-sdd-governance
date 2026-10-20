@@ -5,7 +5,7 @@ description = "Unified Technical Director / Product Manager (TD/PM) and Stage-Ga
 readme = "README.md"
 license = "MIT"
 authors = [
-    { name = "Antigravity Authors & Contributors" },
+    { name = "Raymond Yan", email = "keraymondyan69@gmail.com" },
 ]
 keywords = [
     "antigravity",
@@ -41,8 +41,8 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/example-org/tdpm-sdd-governance"
-Repository = "https://github.com/example-org/tdpm-sdd-governance"
+Homepage = "https://aruruka.github.io/tdpm-sdd-governance/"
+Repository = "https://github.com/aruruka/tdpm-sdd-governance"
 
 [project.scripts]
 tdpm-sdd = "tdpm_sdd.cli:main"

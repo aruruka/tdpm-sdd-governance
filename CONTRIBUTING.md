@@ -10,7 +10,7 @@ Thank you for your interest in contributing to `tdpm-sdd-governance`! We welcome
 
 2. **Clone and Install**:
    ```bash
-   git clone https://github.com/example-org/tdpm-sdd-governance.git
+   git clone https://github.com/aruruka/tdpm-sdd-governance.git
    cd tdpm-sdd-governance
    uv sync --all-extras
    ```
