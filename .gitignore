@@ -37,3 +37,4 @@ desktop.ini
 *.tmp
 *.log
 .system_generated/
+mcp_config.local.json

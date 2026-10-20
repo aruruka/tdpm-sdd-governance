@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Git pre-commit hook: verify zero personal user path leaks in staged files
+python scripts/check_pii_leak.py --staged
