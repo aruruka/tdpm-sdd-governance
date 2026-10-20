@@ -286,14 +286,29 @@ When a workspace contains multiple modules in `phase-lock.json`, `_infer_target_
 
 ## 4. MCP Verification Bridge (`mcp_config.json` & `sdk_bridge.py`)
 
-The `tdpm-sdk-bridge` FastMCP server exposes one tool to `@sdk-architect` and the host agent:
+The `tdpm-sdk-bridge` MCP server exposes tools to `@sdk-architect` and the host agent:
 
-### Tool: `run_sdk_verification_pipeline`
+### Tools: `tdpm_run_sdk_verification_pipeline` (Canonical) & `run_sdk_verification_pipeline` (Alias)
+
+Both tools share identical implementation and capabilities, with `tdpm_run_sdk_verification_pipeline` adhering to the `{service}_{action}_{resource}` standard and `run_sdk_verification_pipeline` maintained for complete backward compatibility.
+
+- **Annotations**:
+  - `readOnlyHint`: `true`
+  - `destructiveHint`: `false`
+  - `idempotentHint`: `true`
+  - `openWorldHint`: `false`
 
 - **Parameters**:
-  - `workspace_dir` (`str`, required): Absolute path to the target governed workspace.
-  - `module_name` (`str`, default `"account"`): Target module name in `phase-lock.json`.
+  - `workspace_dir` (`str`, required, min length 1): Absolute filesystem path to the target governed workspace.
+  - `module_name` (`str`, default `"account"`, min length 1): Target module name in `phase-lock.json`.
   - `focus_area` (`Literal["traceability", "encapsulation", "contracts", "full_gate"]`, default `"full_gate"`): Audit scope.
+  - `session_id` (`str | null`, default `null`): Host session or user identifier for Google Cloud audit telemetry.
+  - `response_format` (`Literal["json", "markdown"]`, default `"json"`): Output format (`"json"` for programmatic parsing, `"markdown"` for agent/human inspection).
+
+### Telemetry & Stdio Transport Hygiene
+
+- All runtime diagnostics and Google Cloud audit telemetry are emitted exclusively to `stderr` as structured JSON entries containing `severity`, `time`, and `logging.googleapis.com/labels`.
+- Standard output (`stdout`) is strictly reserved for JSON-RPC 2.0 protocol packets, guaranteeing zero stdio transport contamination.
 
 ### Execution Modes & Environment Variables
 
